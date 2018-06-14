@@ -1,3 +1,2 @@
 # js-oop
-js
-sdf
+js 面向对象编程联系
