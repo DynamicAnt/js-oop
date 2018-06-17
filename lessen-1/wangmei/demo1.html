@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>产品标题模板</title>
+	<link rel="stylesheet" type="text/css" href="css/base/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/demo.css">
+</head>
+<body>
+	<ul class="fieldset">
+		<li class="field">
+			<div class="field-hd">产品标题</div>
+			<div class="field-bd">
+				<input type="text" class="txt txt-inp js-prod-name">
+			</div>
+		</li>
+	</ul>
+
+	<div class="alpha js-alpha"></div>
+	<div class="pop pop-l js-prod-name-pop"> 
+		<div class="pop-hd"> 
+			<h3>产品标题模板</h3> 
+			<i class="icon-close js-close">×</i> 
+		</div> 
+		<div class="pop-bd"> 
+			<div class="prod-temp js-prod-temp">
+				<div class="star-wrap"> 
+	              <span class="star star-bg"></span> 
+	              <span class="star star-full star-0" id="nameStar"></span> 
+	              <span class="score js-score"> 分数：<em>0</em></span>
+	             </div>
+				<table class="tb-strip"> 
+					<colgroup> 
+						<col width="20%"> 
+						<col width="20%"> 
+						<col width="25%"> 
+						<col width="15%"> 
+						<col /> 
+					</colgroup> 
+					<thead> 
+					<tr> 
+						<th><span class="red">*</span>属性1</th> 
+						<th><span class="red">*</span>属性2</th> 
+						<th><span class="red">*</span>地区、品牌和型号<span class="gray">(至少填一项)</span></th> 
+						<th><span class="red">*</span>核心词</th>
+						<th><span class="red">*</span>属性3</th> 
+					</tr> 
+					</thead> 
+					<tbody> 
+						<tr> 
+							<td class="td-prop">
+								<input type="text" class="txt" name="prop1" placeholder="规格 功能 材质...">
+								<div class="form-error js-error">请填写属性1</div>
+							</td>
+							<td class="td-prop">
+								<input type="text" class="txt" name="prop2" placeholder="规格 功能 材质...">
+								<div class="form-error js-error">请填写属性2</div>
+							</td>
+							<td class="td-eare js-extra">
+								<span class="eare-bd clear">
+									<input type="text" class="txt js-area" name="area" placeholder="地区">
+									<input type="text" class="txt js-brand" name="brand" placeholder="品牌">
+									<input type="text" class="txt js-model" name="model" placeholder="型号">
+								</span>
+								<div class="form-error js-error">地区、品牌、型号必需填一项</div>
+							</td>
+							<td class="td-word">
+								<input type="text" class="txt" name="word">
+								<div class="form-error js-error">请填写核心词</div>
+							</td>
+							<td class="td-prop">
+								<input type="text" class="txt" name="prop3" placeholder="规格 功能 材质...">
+								<div class="form-error js-error">请填写属性3</div>
+							</td>
+						</tr> 
+					</tbody> 
+				</table>
+				 <div class="prod-name">根据填写字段生成的产品标题：
+					<strong class="js-name-value"></strong>
+				</div>
+			</div>
+		</div> 
+		<div class="pop-ft"> 
+			<button type="submit" class="btn btn-l btn-info js-submit">确定</button> 
+			<button type="reset" class="btn btn-l btn-default js-reset">取消</button> 
+		</div> 
+	</div>
+
+<script src="js/jquery-1.7.2.js"></script>
+<script src="js/demo.js"></script>
+</body>
+</html>
