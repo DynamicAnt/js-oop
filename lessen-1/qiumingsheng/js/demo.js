@@ -119,8 +119,7 @@ $(function(){
 	 //提交按钮
 	 $('.js-btnsubmit').click(function(){
 		if(isValid()){
-			var prodName  = generateName();
-			$('.js-prod-name').val(prodName);
+			$('.js-prod-name').val(generateName());
 		   	$('.js-alpha,.js-prod-mod').hide();
 		}
 	 })
