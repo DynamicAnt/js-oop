@@ -91,7 +91,7 @@ $(function(){
 		$('.js-prod-temp').find('input').val('');
 		$('.js-error').hide();
 		$('.js-name-value').text('');
-		$('.js-score').find('em').text('');
+		$('.js-score').find('em').text('0');
 		$('#nameStar').attr('class','star star-full star-0');
 		$('.js-alpha,.js-prod-name-pop').hide();
 	})

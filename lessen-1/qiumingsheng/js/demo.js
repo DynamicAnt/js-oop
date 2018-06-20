@@ -45,21 +45,17 @@ $(function(){
 			return validationAndShow(name,data[name]!=="");
 		},
 		isExtraValid: function(){
-			return validationAndShow("extra",data.area!==""||data.brand!==""||data.model!=="");;
-		},
-		isWordValid: function(){
-			return validationAndShow("word",data.word!=="");
+			return validationAndShow("extra",data.area!==""||data.brand!==""||data.model!=="");
 		}
 	};
 
 	var isValid = function(){
-		var isProp1Valid = validation.isPropValid('prop1');
-		var isProp2Valid = validation.isPropValid('prop2');
-		var isProp3Valid = validation.isPropValid('prop3');
-		var isPropValid = isProp1Valid&&isProp2Valid&&isProp3Valid;
+		var flag = true;
+		$('input[data-type=prop]').each(function(){
+			flag = validation.isPropValid($(this).attr('name')) && flag;
+		});
 		var isExtraValid = validation.isExtraValid();
-		var isWordValid = validation.isWordValid();
-		return isPropValid&&isExtraValid&&isWordValid;
+		return flag&&isExtraValid;
 	}
 
 	var generateName = function(){
@@ -91,7 +87,7 @@ $(function(){
 	for(var name in data){
 		(function(name){
 			$('input[name="'+name+'"]').keyup(function(){
-				data[name] = $(this).val();
+				data[name] = $.trim($(this).val());
 				$('.js-name').find('span[name="'+name+'"]').text(data[name]);
 			});
 			$('input[name="'+name+'"]').blur(function(){
