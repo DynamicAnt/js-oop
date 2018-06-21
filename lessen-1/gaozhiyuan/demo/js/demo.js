@@ -21,6 +21,8 @@ $(function(){
         $('.form-error').hide();
         $('.check').val('');
         $('.js-name').empty();
+        $('#prodNameStar').removeClass($('#prodNameStar').attr('class').split(' ')[2]).addClass("star-0");
+        $('.js-score').html('0');
         flagValues = flagValuesForRestart;
     })
 
