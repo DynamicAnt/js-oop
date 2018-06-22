@@ -1,5 +1,6 @@
 $(function(){	
-	//点击输入框弹出/关闭产品标题模板
+
+	//点击输入框显示弹出层/点击弹层小叉叉关闭弹窗
 	$('.js-prod-name').on('click',function(){
 		$('.js-alpha,.js-prod-name-pop').show();
 	})
@@ -8,7 +9,7 @@ $(function(){
 		$('.js-alpha,.js-prod-name-pop').hide();
 	})
 
-	//校验是否为空
+	//获取到各个元素字段 然后做失焦校验
 	var prop1 = $('input[name=prop1]');
 	var prop2 = $('input[name=prop2]');
 	var area  = $('input[name=area]');
@@ -45,32 +46,26 @@ $(function(){
 			return true
 		}
 	}
-	area.blur(function(){
-		extraValid();
-	});
 
-	brand.blur(function(){
-		extraValid();
-	});
+	var extraArr = [area,brand,model];
+	for(i = 0; i < extraArr.length; i++){
+		extraArr[i].blur(function(){
+			extraValid();
+		})
+	}
 
-	model.blur(function(){
-		extraValid();
-	});
-
-	//获取标题，实时显示标题 算出标题分数以及评分
+	//实时显示标题 算出标题分数以及评分
 	$('.js-prod-temp').find('input').on('input propertychange',function(){
 		var prodName = prop1.val() + prop2.val() + area.val() + brand.val() + model.val() + word.val() + prop3.val();
-			$('.js-name-value').text(prodName);
-			length = $('.js-name-value').text().length;
-			var score = length * 5;
-			if( score > 100){
-				score = 100;
-			}
-			$('.js-score').find('em').text(score);
-			$('#nameStar').attr('class','star star-full star-'+ Math.floor(score/10));
-		})
+		$('.js-name-value').text(prodName);
+		length = prodName.length;
+		var score = length * 5;
+		score = score > 100?100:score;
+		$('.js-score').find('em').text(score);
+		$('#nameStar').attr('class','star star-full star-'+ Math.floor(score/10));
+	})
 
-	//点击提交按钮把标题写进输入框
+	//点击提交按钮校验是否为空，不为空就把标题写进输入框
 	$('.js-submit').on('click',function(){
 		var rst = [];
 		for(i = 0;i<eleArr.length;i++){
@@ -91,8 +86,9 @@ $(function(){
 		$('.js-prod-temp').find('input').val('');
 		$('.js-error').hide();
 		$('.js-name-value').text('');
-		$('.js-score').find('em').text('0');
+		$('.js-score').find('em').text('');
 		$('#nameStar').attr('class','star star-full star-0');
 		$('.js-alpha,.js-prod-name-pop').hide();
 	})
+	
 })
