@@ -21,57 +21,51 @@ $(function(){
         $('.form-error').hide();
         $('.check').val('');
         $('.js-name').empty();
-        $('#prodNameStar').removeClass($('#prodNameStar').attr('class').split(' ')[2]).addClass("star-0");
+        $('#prodNameStar').attr("class","star star-full star-0");
         $('.js-score').html('0');
         flagValues = flagValuesForRestart;
     })
 
-    var names = {'prop1':'属性1',
-                 'prop2':'属性2',
-                 'area':'地区、品牌和型号',
-                 'brand':'地区、品牌和型号',
-                 'model':'地区、品牌和型号',
-                 'words':'核心词',
-                 'prop3':'属性3'};
+    var flagValues = {
+                       'prop1':'',
+                       'prop2':'',
+                       'area':'',
+                       'brand':'',
+                       'model':'',
+                       'words':'',
+                       'prop3':''
+                     };
 
-    var flagValues = {'prop1':'','prop2':'','area':'','brand':'','model':'','words':'','prop3':''};
-
-    var flagValuesForRestart = {'prop1':'','prop2':'','area':'','brand':'','model':'','words':'','prop3':''};
+    var flagValuesForRestart = flagValues;
 
     function bindFocusAndBlur(className){         
         $("."+className).blur(function(){
         var _this = $(this);
-        if(_this.attr('name')=='area'||_this.attr('name')=='brand'||_this.attr('name')=='model'){
-                var tips =names[_this.attr('name')]+'至少填写一项';
+        if(_this.attr('name')=='area'||_this.attr('name')=='brand'||_this.attr('name')=='model'){               
                 if($('input[name="area"]').val()=='' && $('input[name="brand"]').val()=='' && $('input[name="model"]').val()==''){
-                     _this.parent().parent().find("div").html(tips).show();
-                     flagValues[_this.attr('name')] = '';                     
-                     checkPonter();
+                     _this.parent().parent().find("div").show();                                                           
                 }else{
-                     _this.parent().parent().find("div").hide();
-                     flagValues[_this.attr('name')] = _this.val();                   
-                     checkPonter();
-                }
-        }else{
-                var tips ='请填写'+names[_this.attr('name')];
+                     _this.parent().parent().find("div").hide();                                                          
+                }               
+        }else{            
                 if(_this.val() == null || _this.val() == ''){
-                     _this.parent().find("div").html(tips).show();
-                     flagValues[_this.attr('name')] = '';                     
-                     checkPonter();
+                     _this.parent().find("div").show();                                                         
                 }else{
-                     _this.parent().find("div").hide();
-                     flagValues[_this.attr('name')] = _this.val();                   
-                     checkPonter();                  
+                     _this.parent().find("div").hide();                                                               
                 }      
-            };             
-       }); 
+        }
+        flagValues[_this.attr('name')] = _this.val();
+        checkPonter();             
+      }); 
     }
+
     function checkPonter(){
         
         $('.js-name').html(flagValues['prop1']+flagValues['prop2']+flagValues['area']+flagValues['brand']+flagValues['model']+flagValues['words']+flagValues['prop3']);
         var allPointer = flagValues['prop1'].length+flagValues['prop2'].length+flagValues['area'].length+flagValues['brand'].length+flagValues['model'].length+flagValues['words'].length+flagValues['prop3'].length;
-        $('.js-score').html((allPointer*5)<=100?allPointer*5:100);
-        $('#prodNameStar').removeClass($('#prodNameStar').attr('class').split(' ')[2]).addClass("star-"+parseInt(((allPointer*5)<=100?allPointer*5:100)/10));
+        var finalPoint = (allPointer*5)<=100?allPointer*5:100;
+        $('.js-score').html(finalPoint);
+        $('#prodNameStar').attr('class',"star star-full star-"+parseInt(finalPoint/10));
     };
     bindFocusAndBlur('check');
 });
