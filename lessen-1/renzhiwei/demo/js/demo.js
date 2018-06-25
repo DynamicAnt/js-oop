@@ -1,5 +1,5 @@
-$(function(){	
-	var $alpha = $('.js-alpha'),
+$(function(){   
+    var $alpha = $('.js-alpha'),
         $prodMod = $('.js-prod-mod'),
         $prodName = $('.js-prod-name'),
         $prodNameStar = $('#prodNameStar'),
@@ -7,16 +7,19 @@ $(function(){
         $names = $('.js-name');
     var arr = [];
 
-	//点击产品标题输入框弹出模板弹窗；
+    //点击产品标题输入框弹出模板弹窗；
     $prodName.on('click',function(){
         $alpha.show();
         $prodMod.show();
-	});
+    });
 
-    $prodMod.on('keyup', 'input', function(){
-        arr = [];
-        fillMsg(this);
-        validMsg(this);
+    $prodMod.find('input').each(function(i, ele) {
+        $(ele).on('keyup', function() {
+            arr = [];
+            fillMsg(ele);
+        }).on('blur', function() {
+            validMsg(ele);
+        })
     });
 
     function fillMsg(ele) {
@@ -31,7 +34,7 @@ $(function(){
     function getVal(ele) {
         var $inputs = $(ele).closest('tbody').find('input');
         $inputs.each(function(i, ele) {
-            var val = $(ele).val();
+            var val = $.trim($(ele).val());
             if(!val) {
                 return
             }
@@ -63,7 +66,7 @@ $(function(){
         var $formError = $td.find('.form-error');
         var vals = [];
         $inputs.each(function(i, e) {
-            var val = $(e).val();
+            var val = $.trim($(e).val());
             if(!val) {
                 return
             }
@@ -78,9 +81,9 @@ $(function(){
         }
     }
 
-	 $('.js-submit-btn').click(function(){
-	     var flag = true;
-	     $('tbody').find('input').each(function (i, ele) {
+     $('.js-submit-btn').click(function(){
+         var flag = true;
+         $('tbody').find('input').each(function (i, ele) {
             flag = validMsg(ele) && flag;
          });
          if(flag) {
@@ -88,7 +91,7 @@ $(function(){
              $prodName.val(text);
              closePop();
          }
-	 });
+     });
 
     $('.js-cancel-btn').on('click',function(){
         $prodNameStar.removeClass().addClass('star star-full star-0');
