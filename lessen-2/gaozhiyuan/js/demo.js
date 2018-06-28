@@ -101,6 +101,8 @@ $(function(){
         checkPonter:function(className){
             var length=0;
             var title='';
+            var conutPointer = 0;
+            var finalPoint = 0;
             if(className == 'check'){
                for(var property in flagValues){
                    if(property == 'tmp2-prop1'){
@@ -109,17 +111,20 @@ $(function(){
                length = length+flagValues[property].length;
                title = title+flagValues[property];
               }
+              finalPoint = (length*5)<=100?length*5:100;
             }else{
                for(var property in flagValues){
                   if(untilFunc.isInArray(aryFlag,property)){
                         continue;
                   }
-                  length = length+flagValues[property].length;
+                  if(flagValues[property]!=null&&flagValues[property]!=''){
+                         conutPointer=conutPointer+1;
+                  }
                   title = title+flagValues[property];
-               }  
+               }
+               finalPoint = conutPointer*10;  
             }       
-            $('.prod-temp-result strong').html(title);      
-            var finalPoint = (length*5)<=100?length*5:100;
+            $('.prod-temp-result strong').html(title);                  
             $('.score em').html(finalPoint);
             $('#nameStar').attr('class',"star star-full star-"+parseInt(finalPoint/10));  
         },
