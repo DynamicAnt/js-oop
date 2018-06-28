@@ -55,6 +55,8 @@ $(function(){
 
     var Template1 = function($panel){
         this.$panel = $panel;
+        this.data = {};
+        this.prodScore = 0;
         this.init();
     }
     Template1.prototype = new Template();
@@ -69,7 +71,7 @@ $(function(){
 			extra: "地区、品牌、型号至少填写一项"
         },
         isExtra:function(name){
-            return name==='area'||name==='brand'||name==="model"||name==="name";
+            return name==='area'||name==='brand'||name==="model"||name==="extra";
         },
 		isInputValid:function(name){
             return this.isExtra(name)?this.isExtraValid():this.isPropValid(name);
@@ -94,7 +96,7 @@ $(function(){
                 });
     
                 $(this).blur(function(){
-                    isInputValid(name);
+                    _this.isInputValid(name);
                     _this.prodNameLength = _this.generateName().length;
                     _this.updateScore();
                     _this.updateScoreView();
@@ -105,6 +107,8 @@ $(function(){
 
     var Template2 = function($panel){
         this.$panel = $panel;
+        this.data = {};
+        this.prodScore = 0;
         this.init();
     }
     Template2.prototype = new Template();
