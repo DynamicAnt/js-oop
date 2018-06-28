@@ -34,10 +34,10 @@ $(function(){
         this.resetData();
     }
     Template.prototype.validationAndShow = function(name,isValid){
-        if(!isValid){
-            this.$panel.find('div[name="error.'+name+'"]').html(this.errors[name]).show();
-        }else{
+        if(isValid){
             this.$panel.find('div[name="error.'+name+'"]').empty().hide();
+        }else{
+            this.$panel.find('div[name="error.'+name+'"]').html(this.errors[name]).show();
         }
         return isValid;
     };

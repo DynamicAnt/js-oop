@@ -2,10 +2,10 @@ $(function(){
 
 	utilFunc = {
 		validationAndShow: function($panel,name,isValid,errors){
-			if(!isValid){
-				$panel.find('div[name="error.'+name+'"]').html(errors[name]).show();
+			if(isValid){
+				this.$panel.find('div[name="error.'+name+'"]').empty().hide();
 			}else{
-				$panel.find('div[name="error.'+name+'"]').empty().hide();
+				this.$panel.find('div[name="error.'+name+'"]').html(this.errors[name]).show();
 			}
 			return isValid;
 
