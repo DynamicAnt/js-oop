@@ -29,11 +29,13 @@ $(function(){
 		 * @param  {[type]} tab tab元素
 		 */
 		 getScore: function(tab) {
-			var len = tab.hasClass('js-tab1') ? namesArr.join('').length : namesArr.length;
+		 	var isTab1 = tab.hasClass('js-tab1');
+			var len = isTab1 ? namesArr.join('').length : namesArr.length;
 			len = len > 20 ? 20 : len;
-			var score = len*5;
+			var score = isTab1 ? len*5 : len*10;
+			var starLen = isTab1 ? len/2 : len;
 			var $parent = tab.parent();
-			$parent.find('.js-star').removeClass().addClass('star star-full js-star star-'+Math.floor(len / 2));
+			$parent.find('.js-star').removeClass().addClass('star star-full js-star star-'+Math.floor(starLen));
 			$parent.find('.js-score').text(score);
 		},
 		/**
