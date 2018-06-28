@@ -1,5 +1,43 @@
 $(function(){	
 
+	utilFunc = {
+		validationAndShow: function($panel,name,isValid,errors){
+			if(!isValid){
+				$panel.find('div[name="error.'+name+'"]').html(errors[name]).show();
+			}else{
+				$panel.find('div[name="error.'+name+'"]').empty().hide();
+			}
+			return isValid;
+
+		},
+		generateName:function(data){
+			var prodName = "";
+			for(var prop in data){
+				prodName = prodName + data[prop];
+			}
+			return prodName;
+		},
+		updateScoreView: function(prodScore){
+			$('.js-score').text(prodScore);
+			$('#prodNameStar').attr('class','').addClass('star star-full star-'+Math.floor(prodScore/10));
+		},
+		reset: function($panel,data){
+			for(var name in data){
+				$panel.find('input[name="'+name+'"]').val('');
+				$panel.find('.js-name').find('span[name="'+name+'"]').text('');
+				data[name] = "";
+			}
+			$panel.find('.form-error').empty().hide();
+			this.updateScoreView(0);
+			return data;
+		},
+		updateField: function($panel,data,field,value){
+			data[field] = value;
+			$panel.find('.js-name').find('span[name="'+field+'"]').text(value);
+			return data;
+		}
+	}
+
 	var template1 = function($panel){
 		var prodNameLength = 0;
 		var prodScore = 0;
@@ -13,57 +51,36 @@ $(function(){
 		};
 		var _this = this;
 
-		var validationAndShow = function(name,isValid){
-			if(!isValid){
-				$panel.find('div[name="error.'+name+'"]').html(errors[name]).show();
-			}else{
-				$panel.find('div[name="error.'+name+'"]').empty().hide();
-			}
-			return isValid;
-
+		this.isPropValid =  function(name){
+			return utilFunc.validationAndShow($panel,name,data[name]!=="",errors);
 		};
-
-		var validation = {
-			isPropValid: function(name){
-				return validationAndShow(name,data[name]!=="");
-			},
-			isExtraValid: function(){
-				return validationAndShow("extra",data.area!==""||data.brand!==""||data.model!=="");;
-			}
+		this.isExtraValid = function(){
+			return utilFunc.validationAndShow($panel,"extra",data.area!==""||data.brand!==""||data.model!=="",errors);;
 		};
 
 		this.isValid = function(){
 			var flag = true;
 			$('input[data-type=prop]').each(function(){
-				flag = validation.isPropValid($(this).attr('name')) && flag;
+				flag = _this.isPropValid($(this).attr('name')) && flag;
 			});
-			var isExtraValid = validation.isExtraValid();
-			return flag&&isExtraValid;
-		}
-		
-		this.generateName = function(){
-			return data.prop1+data.prop2+data.area+data.brand+data.model+data.prop3+data.word;
+			var isExtraValidFlag = _this.isExtraValid();
+			return flag&&isExtraValidFlag;
 		}
 
 		var updateScore = function(){
 			prodScore = prodNameLength>20?100:prodNameLength*5;
 		}
 
-		this.updateScoreView = function(){
-			$('.js-score').text(prodScore);
-			$('#prodNameStar').attr('class','').addClass('star star-full star-'+Math.floor(prodScore/10));
-		}
-
 		this.reset = function(){
-			for(var name in data){
-				$panel.find('input[name="'+name+'"]').val('');
-				$panel.find('.js-name').find('span[name="'+name+'"]').text('');
-				data[name] = "";
-			}
-			$panel.find('.form-error').empty().hide();
+			data = utilFunc.reset($panel,data);
 			prodNameLength = 0;
 			prodScore = 0;
-			_this.updateScoreView();
+		}
+		this.getProdScore = function(){
+			return prodScore;
+		}
+		this.getData = function(){
+			return data;
 		}
 
 		//为Input框绑定keyup和失焦事件
@@ -71,20 +88,19 @@ $(function(){
 			var name = $(this).attr('name');
 			data[name] = '';
 			$(this).keyup(function(){
-				data[name] = $.trim($(this).val());
-				$panel.find('.js-name').find('span[name="'+name+'"]').text(data[name]);
+				data = utilFunc.updateField($panel,data,name,$.trim($(this).val()));
 			});
 
 			$(this).blur(function(){
 				var type = $(this).data('type');
 				var method = "is"+type.substring(0,1).toUpperCase()+type.substring(1)+"Valid";
-				validation[method].call(this,name);
+				_this[method].call(_this,name);
 	
-				var length = _this.generateName().length;
+				var length = utilFunc.generateName(data).length;
 				if(length!==prodNameLength){
 					prodNameLength = length;
 					updateScore();
-					_this.updateScoreView();
+					utilFunc.updateScoreView(prodScore);
 				}
 			});
 		});
@@ -103,18 +119,8 @@ $(function(){
 		};
 		var _this = this;
 
-		var validationAndShow = function(name,isValid){
-			if(!isValid){
-				$panel.find('div[name="error.'+name+'"]').html(errors[name]).show();
-			}else{
-				$panel.find('div[name="error.'+name+'"]').empty().hide();
-			}
-			return isValid;
-
-		};
-
 		var isInputValid = function(name){
-			return validationAndShow(name,data[name]!=="");
+			return utilFunc.validationAndShow($panel,name,data[name]!=="",errors);
 		};
 
 		this.isValid = function(){
@@ -123,9 +129,6 @@ $(function(){
 				flag = isInputValid(prop)&&flag ;
 			}
 			return flag;
-		}
-		this.generateName = function(){
-			return data.prop1+data.prop2+data.word+data.area+data.brand+data.model+data.alias1+data.prop3+data.prop4+data.alias2;
 		}
 
 		var updateScore = function(){
@@ -138,20 +141,16 @@ $(function(){
 			prodScore = i * 10;
 		}
 
-		this.updateScoreView = function(){
-			$('.js-score').text(prodScore);
-			$('#prodNameStar').attr('class','').addClass('star star-full star-'+Math.floor(prodScore/10));
+		this.reset = function(){
+			var data = utilFunc.reset($panel,data);
+			prodScore = 0;
 		}
 
-		this.reset = function(){
-			for(name in data){
-				$panel.find('input[name="'+name+'"]').val('');
-				$panel.find('.js-name').find('span[name="'+name+'"]').text('');
-				data[name] = "";
-			}
-			$panel.find('.form-error').empty().hide();
-			prodScore = 0;
-			_this.updateScoreView();
+		this.getProdScore = function(){
+			return prodScore;
+		}
+		this.getData = function(){
+			return data;
 		}
 
 		//为Input框绑定keyup和失焦事件
@@ -159,13 +158,12 @@ $(function(){
 			var name = $(this).attr('name');
 			data[name] = '';
 			$(this).keyup(function(){
-				data[name] = $.trim($(this).val());
-				$panel.find('.js-name').find('span[name="'+name+'"]').text(data[name]);
+				data = utilFunc.updateField($panel,data,name,$.trim($(this).val()));
 			});
 			$(this).blur(function(){
 				isInputValid(name);
 				updateScore();
-				_this.updateScoreView();
+				utilFunc.updateScoreView(prodScore);
 			});
 		});
 	}
@@ -183,14 +181,13 @@ $(function(){
 		var $node = $('.js-node').children().eq(i);
 		$node.addClass('on');
 		$node.siblings().removeClass('on');
-
 	}
 
 	$('.js-tab li').each(function(i){
 		$(this).on('click',function(){
 			chooseTab(i);
 			template = templateArr[i];
-			template.updateScoreView();
+			utilFunc.updateScoreView(template.getProdScore());
 		});
 	});
 	//点击产品标题输入框弹出模板弹窗；
@@ -203,7 +200,7 @@ $(function(){
 	 //提交按钮
 	 $('.js-btnsubmit').click(function(){
 		if(template.isValid()){
-			var prodName  = template.generateName();
+			var prodName  = utilFunc.generateName(template.getData());
 			$('.js-prod-name').val(prodName);
 		   	$('.js-alpha,.js-prod-name-pop').hide();
 		}

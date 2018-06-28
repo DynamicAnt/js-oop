@@ -41,19 +41,22 @@ $(function(){
         }
         return isValid;
     };
-    Template.prototype.generateName = function(name,isValid){
+    Template.prototype.generateName = function(name){
         var prodName='';
         for(var name in this.data){
             prodName+=this.data[name];
         }
         return prodName;
     };
+    Template.prototype.updateField = function(field,value){
+        this.data[field] = value;
+        this.$panel.find('.js-name').find('span[name="'+field+'"]').text(value);
+    };
 
     var Template1 = function($panel){
         this.$panel = $panel;
         this.init();
     }
-
     Template1.prototype = new Template();
 
     $.extend(Template1.prototype,{
@@ -65,8 +68,11 @@ $(function(){
 			word: "请填写核心词",
 			extra: "地区、品牌、型号至少填写一项"
         },
+        isExtra:function(name){
+            return name==='area'||name==='brand'||name==="model"||name==="name";
+        },
 		isInputValid:function(name){
-            return name==='extra'?this.isExtraValid():this.isPropValid(name);
+            return this.isExtra(name)?this.isExtraValid():this.isPropValid(name);
         },
         isPropValid:function(name){
             return this.validationAndShow(name,this.data[name]!=="");
@@ -83,32 +89,24 @@ $(function(){
                 var name = $(this).attr('name');
                 _this.data[name] = '';
                 $(this).keyup(function(){
-                    _this.data[name] = $.trim($(this).val());
-                    _this.$panel.find('.js-name').find('span[name="'+name+'"]').text(_this.data[name]);
+                    var value = $.trim($(this).val());
+                    _this.updateField(name,value);
                 });
     
                 $(this).blur(function(){
-                    var type = $(this).data('type');
-                    var method = "is"+type.substring(0,1).toUpperCase()+type.substring(1)+"Valid";
-                    _this[method].call(_this,name);
-        
-                    var length = _this.generateName().length;
-                    if(length!==_this.prodNameLength){
-                        _this.prodNameLength = length;
-                        _this.updateScore();
-                        _this.updateScoreView();
-                    }
+                    isInputValid(name);
+                    _this.prodNameLength = _this.generateName().length;
+                    _this.updateScore();
+                    _this.updateScoreView();
                 });
             });
         }
-        
     });
 
     var Template2 = function($panel){
         this.$panel = $panel;
         this.init();
     }
-
     Template2.prototype = new Template();
 
     $.extend(Template2.prototype,{
@@ -138,9 +136,10 @@ $(function(){
                 var name = $(this).attr('name');
                 _this.data[name] = '';
                 $(this).keyup(function(){
-                    _this.data[name] = $.trim($(this).val());
-                    _this.$panel.find('.js-name').find('span[name="'+name+'"]').text(_this.data[name]);
+                    var value = $.trim($(this).val());
+                    _this.updateField(name,value);
                 });
+
                 $(this).blur(function(){
                     _this.isInputValid(name);
                     _this.updateScore();
@@ -148,7 +147,6 @@ $(function(){
                 });
             });
         }
-        
     });
 
     var template1 = new Template1($('.js-node').children().eq(0));
@@ -164,7 +162,6 @@ $(function(){
 		var $node = $('.js-node').children().eq(i);
 		$node.addClass('on');
 		$node.siblings().removeClass('on');
-
 	}
 	
 	$('.js-tab li').each(function(i){
