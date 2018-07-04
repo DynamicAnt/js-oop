@@ -17,7 +17,7 @@ $(function(){
           } 
       }else{
              var checkValues = $('.js-tab2');
-             if(untilFunc.isPass(checkValues)){   
+             if(utilsFunc.isPass(checkValues)){   
                 $('.js-alpha,.js-prod-name-pop').hide();
                 $('.js-prod-name').val($('.prod-temp-result strong:eq(1)').text());
              }else{
@@ -32,22 +32,22 @@ $(function(){
         $('.'+showNodeClass).addClass('on');
         $(this).addClass('on');
         if(showNodeClass == 'info-1st'){
-            untilFunc.checkPonter('check');
+            utilsFunc.checkPonter('check');
             flaTab = 'tab1';  
         }else{
-            untilFunc.checkPonter('check-tab2');
+            utilsFunc.checkPonter('check-tab2');
             flaTab = 'tab2';
         }       
     });
     //点击取消按钮清空弹窗内数据
     $('.js-btnreset').click(function(){ 
-        untilFunc.resetObj(flagValues);
+        utilsFunc.resetObj(flagValues);
         $('.js-alpha,.js-prod-name-pop').hide();
         $('.form-error').hide();
         $('.check').val('');
         $('.check-tab2').val('');
-        untilFunc.checkPonter();
-        $('.js-tab-info li:first').click();     
+        utilsFunc.checkPonter();
+        $('.js-tab-info li:first').click();    
     })
     var flaTab = 'tab1';
     var aryFlag = ['prop1','prop2','area','brand','model','words','prop3'];
@@ -71,14 +71,11 @@ $(function(){
        'tmp2-alias2':''
        };
    
-    var untilFunc = {
+    var utilsFunc = {
         //工具方法判断元素是不是在数组内       
         isInArray:function(arr,value){
             var index = $.inArray(value,arr);
-            if(index >= 0){
-               return true;
-            }
-               return false;
+            return index >= 0;
         },
         //重置对象
         resetObj:function(obj){
@@ -105,16 +102,16 @@ $(function(){
             var finalPoint = 0;
             if(className == 'check'){
                for(var property in flagValues){
-                   if(property == 'tmp2-prop1'){
-                    break;
-               }
+                   if(!utilsFunc.isInArray(aryFlag,property)){
+                        continue;
+                   }
                length = length+flagValues[property].length;
                title = title+flagValues[property];
               }
               finalPoint = (length*5)<=100?length*5:100;
             }else{
                for(var property in flagValues){
-                  if(untilFunc.isInArray(aryFlag,property)){
+                  if(utilsFunc.isInArray(aryFlag,property)){
                         continue;
                   }
                   if(flagValues[property]!=null&&flagValues[property]!=''){
@@ -147,14 +144,14 @@ $(function(){
                 }      
               }
               flagValues[_this.attr('name')] = _this.val();
-              untilFunc.checkPonter(className);             
+              utilsFunc.checkPonter(className);             
          });
         },
         //初始化事件
         init:function(){
-           untilFunc.bindFocusAndBlur('check');
-           untilFunc.bindFocusAndBlur('check-tab2');
+           utilsFunc.bindFocusAndBlur('check');
+           utilsFunc.bindFocusAndBlur('check-tab2');
         }
     };
-    untilFunc.init();
+    utilsFunc.init();
 });
