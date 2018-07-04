@@ -32,7 +32,7 @@ $(function(){
     var moduleGrade = function (value, index, i) {
         title_arr[i][index] = value;
         var title_str = title_arr[i].join('');
-        if (i === 0){
+        if (i == 0){
             score_module[i] = title_str.length > 20 ? 100 : title_str.length * 5;
             star_level[i] = title_str.length > 20 ? 10 : Math.floor(title_str.length/2);
         } else {
@@ -43,7 +43,7 @@ $(function(){
             }
         }
         $(".js-title:eq("+ i +")").text(title_str);
-        $('#nameStar')[0].className = 'star star-full star-' + star_level[i];
+        $('#nameStar').removeClass().addClass('star star-full star-' + star_level[i])
         $('.js-score').text(score_module[i]);
     }
 
