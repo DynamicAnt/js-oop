@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>产品标题模板</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" type="text/css" href="css/base/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/demo.css">
+</head>
+<body>
+	<ul class="fieldset">
+		<li class="field">
+			<div class="field-hd">产品标题</div>
+			<div class="field-bd">
+				<input type="text" class="txt txt-inp js-prod-name">
+			</div>
+		</li>
+	</ul>
+
+	<div class="alpha js-alpha"></div>
+	<div class="pop pop-l js-prod-name-pop"> 
+		<div class="pop-hd"> 
+			<h3>产品标题模板</h3> 
+			<i class="icon-close js-close">×</i> 
+		</div> 
+		<div class="pop-bd"> 
+			<ul class="tab-info js-tab"> 
+			     <li class="on"><span>模板一</span></li> 
+				 <li><span>模板二</span></li> 
+				 <li><span>服装模板</span></li> 
+		    </ul>
+		    <div class="tab-con">
+		    	<div class="star-wrap"> 
+		            <span class="star star-bg"></span> 
+		            <span class="star star-full star-0" id="prodNameStar"></span> 
+				  	<span>分数：<em class="js-score">0</em></span> 
+				</div>
+				<div class="js-node">
+					<div class="tab-node on">
+						<div class="prod-temp">
+							<table class="tb-strip"> 
+								<colgroup> 
+									<col width="20%"> 
+									<col width="20%"> 
+									<col width="25%"> 
+									<col width="15%"> 
+									<col /> 
+								</colgroup> 
+								<thead> 
+								<tr> 
+									<th><span class="red">*</span>属性1</th> 
+									<th><span class="red">*</span>属性2</th> 
+									<th><span class="red">*</span>地区、品牌和型号<span class="gray">(至少填一项)</span></th> 
+									<th><span class="red">*</span>属性3</th>
+									<th><span class="red">*</span>核心词</th> 
+								</tr> 
+								</thead> 
+								<tbody> 
+									<tr> 
+										<td class="td-prop">
+											<input type="text" class="txt" name="prop1" data-type="prop" placeholder="规格 功能 材质..." >
+											<div name="error.prop1" class="form-error">报错信息</div>
+										</td>
+										<td class="td-prop">
+											<input type="text" class="txt" name="prop2" data-type="prop" placeholder="规格 功能 材质...">
+											<div name="error.prop2" class="form-error">报错信息</div>
+										</td>
+										<td class="td-eare">
+											<span class="eare-bd clear">
+												<input type="text" class="txt" name="area" data-type="extra" placeholder="地区">
+												<input type="text" class="txt" name="brand" data-type="extra" placeholder="品牌">
+												<input type="text" class="txt" name="model" data-type="extra" placeholder="型号">
+											</span>
+											<div name="error.extra" class="form-error red">报错信息</div>
+										</td>
+										<td class="td-prop">
+											<input type="text" class="txt" name="prop3" data-type="prop" placeholder="规格 功能 材质...">
+											<div name="error.prop3" class="form-error">报错信息</div>
+										</td>
+										<td class="td-word">
+											<input type="text" class="txt" name="word" data-type="prop">
+											<div name="error.word" class="form-error">报错信息</div>
+										</td>
+										
+									</tr> 
+								</tbody> 
+							</table>
+							<div class="prod-name">根据填写字段生成的产品标题：
+								<strong class="js-name">
+									<span name="prop1"></span><span name="prop2"></span>
+									<span name="area"></span><span name="brand"></span><span name="model"></span>
+									<span name="prop3"></span><span name="word"></span>
+								</strong>
+							</div> <!---->
+						</div>
+					</div> 
+					<!--tab node end -->
+
+					<div class="tab-node">
+						<div class="prod-temp prod-temp2">
+							<table class="tb-strip"> 
+								<colgroup>
+									<col width='33%'>
+									<col />
+									<col width='33%'>
+								</colgroup>
+								<thead> 
+									<tr> 
+										<th><span class="red">*</span>属性1</th> 
+										<th><span class="red">*</span>属性2</th> 
+										<th><span class="red">*</span>核心词</th> 
+									</tr> 
+								</thead> 
+								<tbody> 
+									<tr> 
+										<td class="td-prop"> 
+											<input type="text" class="txt" name="prop1" placeholder="规格 功能 材质..."> 
+											<div class="form-error" name="error.prop1"></div>
+										</td> 
+										<td class="td-prop">
+											<input type="text" class="txt" name="prop2" placeholder="规格 功能 材质...">
+											<div class="form-error" name="error.prop2"></div>
+										</td> 
+										<td class="td-word">
+											<input type="text" class="txt" name="word"> 
+											<div class="form-error" name="error.word">请填写核心词</div> 
+										</td> 
+									</tr> 
+								</tbody> 
+							</table> 
+							<table class="tb-strip"> 
+								<colgroup>
+									<col width='33%'>
+									<col />
+									<col width='33%'>
+								</colgroup>
+								<thead> 
+									<tr> 
+										<th>地区、品牌、型号</th> 
+										<th>别名一</th> 
+										<th>&nbsp;</th> 
+									</tr> 
+								</thead> 
+								<tbody> 
+									<tr> 
+										<td class="td-eare clear">
+											<input type="text" class="txt" name="area" placeholder="地区">
+											<input type="text" class="txt" name="brand" placeholder="品牌">
+											<input type="text" class="txt" name="model" placeholder="型号">
+										</td>
+										<td class="td-alias">
+											<input type="text" class="txt" name="alias1" placeholder="别名一"> 
+										</td> 
+										<td>&nbsp;</td> 
+									</tr> 
+								</tbody> 
+							</table> 
+							<table class="tb-strip"> 
+								<colgroup>
+									<col width='33%'>
+									<col />
+									<col width='33%'>
+								</colgroup>
+								<thead> 
+									<tr> 
+										<th><span class="red">*</span>属性3</th> 
+										<th><span class="red">*</span>属性4</th> 
+										<th><span class="red">*</span>别名二</th> 
+									</tr> 
+								</thead> 
+								<tbody> 
+									<tr> 
+										<td class="td-prop">
+											<input type="text" class="txt" name="prop3" placeholder="规格 功能 材质...">
+											<div class="form-error" name="error.prop3">请填写属性3</div> 
+										</td> 
+										<td class="td-prop">
+											<input type="text" class="txt" name="prop4" placeholder="规格 功能 材质..." >
+											<div class="form-error" name="error.prop4">请填写属性4</div> 
+										</td> 
+										<td class="td-alias">
+											<input type="text" class="txt" name="alias2" placeholder="别名二" >
+											<div class="form-error" name="error.alias2">请填写别名二</div> 
+										</td> 
+									</tr> 
+								</tbody> 
+							</table> 
+							<div class="prod-temp-result">
+								根据填写字段生成的标题： 
+								<strong class="js-name">
+									<span name="prop1"></span><span name="prop2"></span><span name="word"></span>
+									<span name="area"></span><span name="brand"></span><span name="model"></span><span name="alias1"></span>
+									<span name="prop3"></span><span name="prop4"></span><span name="alias2"></span>
+								</strong> 
+							</div> 
+						</div>
+					</div>
+				
+					<div class="tab-node">
+						<div class="prod-temp prod-temp3">
+							<table class="tb-strip"> 
+								<colgroup>
+									<col width='20%'>
+									<col width='20%'>
+									<col width='20%'>
+									<col width='20%'>
+									<col width='20%'>
+								</colgroup>
+								<thead> 
+									<tr> 
+										<th><span class="red">*</span>品牌</th> 
+										<th><span class="red">*</span>季节</th> 
+										<th><span class="red">*</span>分类</th> 
+										<th><span class="red">*</span>年份</th> 
+										<th>&nbsp;</th> 
+									</tr> 
+								</thead> 
+								<tbody> 
+									<tr> 
+										<td> 
+											<input type="text" class="txt  js-param" id="brand" name="brand" placeholder="品牌"> 
+											<div class="form-error" name="error.brand"></div>
+										</td> 
+										<td>
+											<select name="season" id="season" class="sel  js-param">
+												<option value="">--选择季节--</option>
+												<option value="春">春</option>
+												<option value="夏">夏</option>
+												<option value="秋">秋</option>
+												<option value="冬">冬</option>
+											</select>
+											<div class="form-error" name="error.season"></div>
+										</td> 
+										<td>
+											<input type="radio" id="man" class="rad js-param" name="sex" value="男装"><label for="man">男装</label>
+											<input type="radio" id="woman" class="rad js-param" name="sex" value="女装"><label for="woman">女装</label>
+											<div class="form-error" name="error.sex"></div> 
+										</td> 
+										<td>
+											<input type="text" class="txt js-param" id="year" name="year" placeholder="年份"> 
+											<div class="form-error" name="error.year"></div> 
+										</td> 
+										<td>&nbsp;</td> 
+									</tr> 
+								</tbody> 
+							</table> 
+							<table class="tb-strip"> 
+								<colgroup>
+									<col width='20%'>
+									<col width='20%'>
+									<col width='20%'>
+									<col width='20%'>
+									<col width='20%'>
+								</colgroup>
+								<thead> 
+									<tr> 
+										<th>属性1</th> 
+										<th>属性2</th> 
+										<th>属性3</th> 
+										<th>属性4</th> 
+										<th><span class="red">*</span>核心词</th> 
+									</tr> 
+								</thead> 
+								<tbody> 
+									<tr> 
+										<td> 
+											<input type="text" class="txt js-param" id="prop1" name="prop1" placeholder="属性1"> 
+										</td> 
+										<td> 
+											<input type="text" class="txt js-param" id="prop2" name="prop2" placeholder="属性2"> 
+										</td> 
+										<td> 
+											<input type="text" class="txt js-param" id="prop3" name="prop3" placeholder="属性3"> 
+										</td> 
+										<td> 
+											<input type="text" class="txt js-param" id="prop4" name="prop4" placeholder="属性4"> 
+										</td> 
+										<td> 
+											<input type="text" class="txt js-param" id="word" name="word" placeholder="核心词"> 
+											<div class="form-error" name="error.word"></div>
+										</td> 
+									</tr> 
+								</tbody> 
+							</table> 
+							<div class="prod-temp-result">
+									根据填写字段生成的标题： 
+								<strong class="js-name">
+									<span name="brand"></span><span name="season"></span><span name="sex"></span><span name="year"></span>
+									<span name="prop1"></span><span name="prop2"></span><span name="prop3"></span><span name="prop4"></span>
+									<span name="word"></span>
+								</strong> 
+							</div>
+						</div>
+					</div><!--tab node end -->
+				
+				</div>		
+			</div>
+		</div>
+			
+		<div class="pop-ft"> 
+			<button type="submit" class="btn btn-l btn-info js-btnsubmit">确定</button> 
+			<button type="reset" class="btn btn-l btn-default js-btnreset">取消</button> 
+		</div> 
+	</div>
+
+<script src="js/jquery-1.7.2.js"></script>
+<script src="js/nameCreator.js"></script>
+<script src="js/product.js"></script>
+</body>
+</html>
