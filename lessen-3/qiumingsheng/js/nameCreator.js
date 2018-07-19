@@ -5,7 +5,8 @@
     $.extend(Template.prototype,{
         updateScoreView : function(){
             $('.js-score').text(this.prodScore);
-            $('#prodNameStar').attr('class','').addClass('star star-full star-'+Math.floor(this.prodScore/10));
+            var starCount = Math.floor(this.prodScore/10);
+            $('#prodNameStar').attr('class','').addClass('star star-full star-' + starCount);
         },
         isValid : function(){
             var flag = true;
