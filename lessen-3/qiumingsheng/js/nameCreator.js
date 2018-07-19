@@ -53,8 +53,6 @@
         }
     })
 
-    
-
     var Template1 = function($panel){
         Template.call(this);
         this.$panel = $panel;
@@ -129,7 +127,7 @@
             return this.validationAndShow(name,this.data[name]!=="");
         },
 		updateScore: function(){
-			var i=0;
+			var i = 0;
 			for(var prop in this.data){
 				if(this.data[prop]!==""){
 					i++;
@@ -151,8 +149,7 @@
                     _this.updateScoreView();
                 });
             });
-        }
-        
+        }      
     });
 
     var Template3 = function($panel){

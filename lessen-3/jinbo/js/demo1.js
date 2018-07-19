@@ -128,13 +128,12 @@ $(function(){
         alias2: "请填写别名2"
     }
     Template2.prototype.updateScore = function () {
-        var i = 0;
-        for(var text in this.data){
-            if(this.data[text]!==""){
-                i++;
+        for(var i = 0,t=0; i < this.$panel.find("[type='text']").length; i++){
+            if(this.$panel.find("[type='text']").eq(i).val() !==""){
+                t++;
             }
         }
-        this.prodScore = i * 10;
+        this.prodScore = t * 10;
     }
     Template2.prototype.isInputValid = function(name) {
         var message = this.$panel.find("div[name="+name+"]").closest('td').find('.js-save-info').val();

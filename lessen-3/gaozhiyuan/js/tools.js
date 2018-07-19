@@ -96,75 +96,74 @@ Moudle.prototype = new MoudleSuper();
 
 $.extend(Moudle.prototype,{
 	init:function(className){
-    this.bindFocusAndBlur(className);   
-    var _this = this;
-    //初始提交事件  
-    $('.js-btnsubmit').click(function(){
-      if(_this.flaTab == 'tab1'){
-         if(_this.flagValues['prop1']!='' && _this.flagValues['words']!='' && _this.flagValues['prop3']!='' && _this.flagValues['prop2']!='' && (_this.flagValues['area']!='' || _this.flagValues['brand']!='' || _this.flagValues['model']!='')){
-             $('.js-alpha,.js-prod-name-pop').hide();
-             $('.js-prod-name').val($('.prod-temp-result strong:eq(0)').text());
-          }else{
-             $('.check').blur(); 
-          } 
-      }else if(_this.flaTab == 'tab3'){
-      	  var checkValues = $('.js-tab3');
-      	  if(_this.isPass(checkValues)){   
-                $('.js-alpha,.js-prod-name-pop').hide();
-                $('.js-prod-name').val($('.prod-temp-result strong:eq(1)').text());
-             }else{
-                $('.check-tab3').blur();
-             }
-      }else{
-             var checkValues = $('.js-tab2');
-             if(_this.isPass(checkValues)){   
-                $('.js-alpha,.js-prod-name-pop').hide();
-                $('.js-prod-name').val($('.prod-temp-result strong:eq(1)').text());
-             }else{
-                $('.check-tab2').blur();
-             }
-      }
-    })
-    //初始化清空事件
-    $('.js-btnreset').click(function(){ 
-        _this.resetObj(_this.flagValues);
-        $('.js-alpha,.js-prod-name-pop').hide();
-        $('.form-error').hide();
-        $('.check').val('');
-        $('.check-tab2').val('');
-        $('.check-tab3').val('');
-        $('.prod-temp-result strong').html('');
-        $(':radio').attr('checked',false);
-        $(':radio:eq(0)').attr('checked',true);
-        $('.js-tab-info li:first').click();    
-    })
-    //初始化单选按钮事件
-    $(":radio").click(function(){
-         _this.flagValues['table3-sex-15'] = $(this).val();
-         _this.checkPonter('check-tab3');
-    });
-    //初始化左右切换事件
-    $('.js-tab-info li').on('click',function(){
-        $('.tab-info li,.tab-node').removeClass('on');
-        var showNodeClass = $(this).attr('name');
-        $('.'+showNodeClass).addClass('on');
-        $(this).addClass('on');
-        if(showNodeClass == 'info-1st'){
-            _this.checkPonter('check');
-            _this.flaTab = 'tab1';  
-        }else if(showNodeClass == 'info-3st'){
+        this.bindFocusAndBlur(className);   
+        var _this = this;
+        //初始提交事件  
+        $('.js-btnsubmit').click(function(){
+            if(_this.flaTab == 'tab1'){
+                if(_this.flagValues['prop1']!='' && _this.flagValues['words']!='' && _this.flagValues['prop3']!='' && _this.flagValues['prop2']!='' && (_this.flagValues['area']!='' || _this.flagValues['brand']!='' || _this.flagValues['model']!='')){
+                    $('.js-alpha,.js-prod-name-pop').hide();
+                    $('.js-prod-name').val($('.prod-temp-result strong:eq(0)').text());
+                }else{
+                    $('.check').blur(); 
+                } 
+            }else if(_this.flaTab == 'tab3'){
+                var checkValues = $('.js-tab3');
+                if(_this.isPass(checkValues)){   
+                    $('.js-alpha,.js-prod-name-pop').hide();
+                    $('.js-prod-name').val($('.prod-temp-result strong:eq(1)').text());
+                }else{
+                    $('.check-tab3').blur();
+                }
+            }else{
+                var checkValues = $('.js-tab2');
+                if(_this.isPass(checkValues)){   
+                    $('.js-alpha,.js-prod-name-pop').hide();
+                    $('.js-prod-name').val($('.prod-temp-result strong:eq(1)').text());
+                }else{
+                    $('.check-tab2').blur();
+                }
+            }
+        })
+        //初始化清空事件
+        $('.js-btnreset').click(function(){ 
+            _this.resetObj(_this.flagValues);
+            $('.js-alpha,.js-prod-name-pop').hide();
+            $('.form-error').hide();
+            $('.check').val('');
+            $('.check-tab2').val('');
+            $('.check-tab3').val('');
+            $('.prod-temp-result strong').html('');
+            $(':radio').attr('checked',false);
+            $(':radio:eq(0)').attr('checked',true);
+            $('.js-tab-info li:first').click();    
+        })
+        //初始化单选按钮事件
+        $(":radio").click(function(){
+            _this.flagValues['table3-sex-15'] = $(this).val();
             _this.checkPonter('check-tab3');
-            _this.flaTab = 'tab3';
-        }else{
-            _this.checkPonter('check-tab2');
-            _this.flaTab = 'tab2';
-        }       
-    });
-    //初始化关闭事件
-    $('.js-close').on('click',function(){
-        $('.js-alpha,.js-prod-name-pop').hide();
-    })
-
+        });
+        //初始化左右切换事件
+        $('.js-tab-info li').on('click',function(){
+            $('.tab-info li,.tab-node').removeClass('on');
+            var showNodeClass = $(this).attr('name');
+            $('.'+showNodeClass).addClass('on');
+            $(this).addClass('on');
+            if(showNodeClass == 'info-1st'){
+                _this.checkPonter('check');
+                _this.flaTab = 'tab1';  
+            }else if(showNodeClass == 'info-3st'){
+                _this.checkPonter('check-tab3');
+                _this.flaTab = 'tab3';
+            }else{
+                _this.checkPonter('check-tab2');
+                _this.flaTab = 'tab2';
+            }       
+        });
+        //初始化关闭事件
+        $('.js-close').on('click',function(){
+            $('.js-alpha,.js-prod-name-pop').hide();
+        })
 	},
 	bindFocusAndBlur:function(className){
 	   var __this = this;
