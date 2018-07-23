@@ -376,12 +376,10 @@
                 var $lis = $('.js-lists li'),
                     $tabs = $('.js-tab-node');
 
-                $lis.eq(0).hide();
-                $tabs.eq(0).hide();
-                $lis.eq(1).hide();
-                $tabs.eq(1).hide();
-                $lis.eq(2).addClass('on');
-                $tabs.eq(2).addClass('on');
+                $lis.hide();
+                $tabs.hide();
+                $lis.eq(2).addClass('on').show();
+                $tabs.eq(2).addClass('on').show();
                 this.templates = [
                     new Template3()
                 ]
