@@ -289,7 +289,6 @@
         this.tmpArr = [];
         Template.call(this, this.formEles, this.$tab);
     }
-
     Template3.prototype = new Template();
     $.extend(Template3.prototype, {
         calculateScore: function () {

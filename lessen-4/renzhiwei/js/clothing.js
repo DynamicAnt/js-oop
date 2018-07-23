@@ -1,5 +1,5 @@
 $(function(){
     new TriggerProdPop({
-        trigger_btn: '#prodNamesBtn'
+        trigger_btn: '#cloNamesBtn'
     });
 });
