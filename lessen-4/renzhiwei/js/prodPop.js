@@ -357,14 +357,13 @@
             alpha: '#alpha'
         };
 
-        options = $.extend(true, settings, options);
-        this.init(options);
+        this.options = $.extend(true, settings, options);
+        this.init(this.options);
     }
-
     $.extend(TriggerProdPop.prototype, {
-        init: function (options) {
+        init: function () {
             this.initEles();
-            this.initEvents(options);
+            this.initEvents();
         },
         initEles: function () {
             this.templates = [
@@ -373,23 +372,23 @@
                 new Template3()
             ]
         },
-        initEvents: function (options) {
+        initEvents: function () {
             var _this = this;
 
-            $(options.trigger_btn).on('click', function () {
-                _this.showPop(options);
+            $(this.options.trigger_btn).on('click', function () {
+                _this.showPop();
             });
 
-            $(options.submit_btn).on('click', function () {
-                _this.handleSubmit(options);
+            $(this.options.submit_btn).on('click', function () {
+                _this.handleSubmit();
             });
 
-            $(options.cancel_btn).on('click', function () {
-                _this.handleCancel(options);
+            $(this.options.cancel_btn).on('click', function () {
+                _this.handleCancel();
             });
 
-            $(options.close_btn).on('click', function () {
-                _this.closePop(options);
+            $(this.options.close_btn).on('click', function () {
+                _this.closePop();
             });
 
             $('.js-lists li').on('click', function () {
@@ -399,7 +398,7 @@
                 _this.templates[index].fillScore();
             });
         },
-        handleSubmit: function (options) {
+        handleSubmit: function () {
             var _this = this;
             var isValidFlag = true;
             var index = $('.js-lists li.on').data('index');
@@ -413,11 +412,11 @@
             });
 
             if (isValidFlag) {
-                _this.closePop(options);
-                _this.fillTriInptName(options);
+                _this.closePop();
+                _this.fillTriInptName();
             }
         },
-        handleCancel: function (options) {
+        handleCancel: function () {
             $('[type="text"]').val('');
             $('select').val('');
             $('[type="radio"]').removeAttr('checked');
@@ -425,6 +424,8 @@
             $('#score').text(0);
             $('.js-prod-names').text('');
             $('.form-error').hide();
+            $('.js-lists li').removeClass('on').eq(0).addClass('on');
+            $('.js-tab-node').removeClass('on').eq(0).addClass('on');
 
             var _this = this;
             _this.templates.map(function (temp) {
@@ -438,23 +439,23 @@
                 })
             });
 
-            _this.closePop(options);
+            _this.closePop();
         },
-        showPop: function (options) {
-            $(options.pop_container).show();
-            $(options.alpha).show();
+        showPop: function () {
+            $(this.options.pop_container).show();
+            $(this.options.alpha).show();
         },
-        closePop: function (options) {
-            $(options.pop_container).hide();
-            $(options.alpha).hide();
+        closePop: function () {
+            $(this.options.pop_container).hide();
+            $(this.options.alpha).hide();
         },
         chooseTab: function (i) {
             $('.js-lists li').removeClass('on').eq(i).addClass('on');
             $('.js-tab-node').removeClass('on').eq(i).addClass('on')
         },
-        fillTriInptName: function (options) {
+        fillTriInptName: function () {
             var prodNames = $('.js-tab-node.on').find('.js-prod-names').text();
-            $(options.trigger_btn).val(prodNames);
+            $(this.options.trigger_btn).val(prodNames);
         }
     });
 
