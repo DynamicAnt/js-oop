@@ -257,27 +257,39 @@ TemplateFactory = (function(){
         template1:{
             clazz:Template1,
             identity:"js-template1-panel",
-            name:"模板一",
+            title:"模板一",
             desc:"common template 1"
         },
         template2:{
             clazz:Template2,
             identity:"js-template2-panel",
-            name:"模板二",
+            title:"模板二",
             desc:"common template 2"
         },
         template3:{
             clazz:Template3,
             identity:"js-template3-panel",
-            name:"模板三",
+            title:"模板三",
             desc:"clothing template"
         },
     }
     return {
-        creator:function(name){
-            var Temp = LIBS[name].clazz;
-            var $li = '<li><span>'+LIBS[name].name+'</span></li>';
-            var $panel = $('.'+LIBS[name].identity);
+        creator:function(temp){
+            var Temp,title,identity,$li,$panel;
+            if(typeof temp === "string"){
+                title = LIBS[temp].title;
+                identity = LIBS[temp].identity;
+            }else if(typeof temp === "object"){
+                var obj = LIBS[temp.templateName];
+                title = temp.title||obj.title;
+                identity = temp.identity||obj.identity;
+                temp = temp.templateName
+            }
+
+            Temp = LIBS[temp].clazz;
+            $li = '<li><span>' + title + '</span></li>';
+            $panel = $('.' + identity);
+            
             $('.js-tab').append($li);
             $('.js-node').append($panel);
             return new Temp($panel);
