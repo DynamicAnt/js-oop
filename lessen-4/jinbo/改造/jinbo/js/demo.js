@@ -247,19 +247,19 @@
             this.btnEvent();
         },
         getTemplate: function () {
-            var template1 = new Template1($('.js-node').children().eq(0));
-            var template2 = new Template2($('.js-node').children().eq(1));
-            var template3 = new Template3($('.js-node').children().eq(2));
+            var template1 = new Template1($('.js-tab-box').children().eq(0));
+            var template2 = new Template2($('.js-tab-box').children().eq(1));
+            var template3 = new Template3($('.js-tab-box').children().eq(2));
             var _self = this;
             var currentIndex = this.options.$ModShowIndex[0];
-            this.templateArr = [template1, template2, template3];
-            $('.js-tab li,.js-node .tab-node').map(function () {
-                if($.inArray($(this).data('index'), _self.options.$ModShowIndex) == -1){
-                    $(this).hide();
-                }
+            var arr = [template1, template2, template3];
+            this.options.$ModShowIndex.map(function (t) {
+                console.log(arr[t])
+                $('.js-tab').append($('.js-li-box').find('li').eq(t));
+                $('.js-node').append($('.js-tab-box').children().eq(t));
+                _self.templateArr.push(arr[t]);
             })
-            this.tabIndex = currentIndex;
-            this.chooseTab(currentIndex);
+            this.chooseTab(this.tabIndex);
         },
         chooseTab: function (i) {
             $tab = $('.js-tab li').eq(i);
@@ -281,7 +281,6 @@
             })
             $('.js-tab').on('click','li', function () {
                 var num = $(this).index();
-                console.log(num);
                 _self.chooseTab(num);
                 _self.tabIndex = num;
                 console.log(_self.templateArr[num]);
